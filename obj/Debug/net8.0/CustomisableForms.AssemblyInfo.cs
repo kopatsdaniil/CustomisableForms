@@ -12,10 +12,11 @@ using System;
 using System.Reflection;
 
 [assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap5")]
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("2a2360f2-a0b7-4d9d-9286-7e7232a8b9ad")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("CustomisableForms")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+490daaab92aa721705b914efbf61cc6b7c36cecd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+65f0af4a7e57d4ec31379b0b5b71cea93533bea0")]
 [assembly: System.Reflection.AssemblyProductAttribute("CustomisableForms")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CustomisableForms")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
