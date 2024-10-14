@@ -1,0 +1,192 @@
+﻿@model CustomisableForms.Models.Form
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details</h1>
+
+<div>
+    <h4>Form</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Image_url)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Image_url)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.User_id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.User_id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Topic_id)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Topic_id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Custom_string1_state)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Custom_string1_state)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Custom_string1_question)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Custom_string1_question)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Custom_string1_answer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Custom_string1_answer)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Custom_string2_state)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Custom_string2_state)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Custom_string2_question)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Custom_string2_question)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Custom_string2_answer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Custom_string2_answer)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Custom_string3_state)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Custom_string3_state)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Custom_string3_question)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Custom_string3_question)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Custom_string3_answer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Custom_string3_answer)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Custom_string4_state)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Custom_string4_state)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Custom_string4_question)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Custom_string4_question)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Custom_string4_answer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Custom_string4_answer)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Custom_int1_state)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Custom_int1_state)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Custom_int1_question)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Custom_int1_question)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Custom_int1_answer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Custom_int1_answer)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Custom_int2_state)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Custom_int2_state)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Custom_int2_question)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Custom_int2_question)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Custom_int2_answer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Custom_int2_answer)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Custom_int3_state)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Custom_int3_state)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Custom_int3_question)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Custom_int3_question)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Custom_int3_answer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Custom_int3_answer)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Custom_int4_state)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Custom_int4_state)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Custom_int4_question)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Custom_int4_question)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Custom_int4_answer)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Custom_int4_answer)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

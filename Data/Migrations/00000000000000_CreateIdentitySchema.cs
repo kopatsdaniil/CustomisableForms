@@ -153,6 +153,53 @@ namespace CustomisableForms.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Forms",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: false),
+                    Image_url = table.Column<string>(nullable: true),
+                    UserId = table.Column<string>(nullable: false),
+                    TopicId = table.Column<string>(nullable: false),
+                    CustomString1State = table.Column<bool>(nullable: true),
+                    CustomString1Question = table.Column<string>(nullable: true),
+                    CustomString1Answer = table.Column<string>(nullable: true),
+                    CustomString2State = table.Column<bool>(nullable: true),
+                    CustomString2Question = table.Column<string>(nullable: true),
+                    CustomString2Answer = table.Column<string>(nullable: true),
+                    CustomString3State = table.Column<bool>(nullable: true),
+                    CustomString3Question = table.Column<string>(nullable: true),
+                    CustomString3Answer = table.Column<string>(nullable: true),
+                    CustomString4State = table.Column<bool>(nullable: true),
+                    CustomString4Question = table.Column<string>(nullable: true),
+                    CustomString4Answer = table.Column<string>(nullable: true),
+                    CustomInt1State = table.Column<bool>(nullable: true),
+                    CustomInt1Question = table.Column<string>(nullable: true),
+                    CustomInt1Answer = table.Column<int>(nullable: true),
+                    CustomInt2State = table.Column<bool>(nullable: true),
+                    CustomInt2Question = table.Column<string>(nullable: true),
+                    CustomInt2Answer = table.Column<int>(nullable: true),
+                    CustomInt3State = table.Column<bool>(nullable: true),
+                    CustomInt3Question = table.Column<string>(nullable: true),
+                    CustomInt3Answer = table.Column<int>(nullable: true),
+                    CustomInt4State = table.Column<bool>(nullable: true),
+                    CustomInt4Question = table.Column<string>(nullable: true),
+                    CustomInt4Answer = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Forms", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Forms_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
