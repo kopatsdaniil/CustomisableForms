@@ -7,15 +7,19 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CustomisableForms.Data;
 using CustomisableForms.Models;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CustomisableForms.Controllers
 {
     public class FormsController : Controller
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public FormsController(ApplicationDbContext context)
+        public FormsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
+            _userManager = userManager;
             _context = context;
         }
 
@@ -44,6 +48,7 @@ namespace CustomisableForms.Controllers
         }
 
         // GET: Forms/Create
+        [Authorize(Roles = "User, Admin")]
         public IActionResult Create()
         {
             return View();
@@ -56,9 +61,18 @@ namespace CustomisableForms.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,Title,Description,Image_url,User_id,Topic_id,Custom_string1_state,Custom_string1_question,Custom_string1_answer,Custom_string2_state,Custom_string2_question,Custom_string2_answer,Custom_string3_state,Custom_string3_question,Custom_string3_answer,Custom_string4_state,Custom_string4_question,Custom_string4_answer,Custom_int1_state,Custom_int1_question,Custom_int1_answer,Custom_int2_state,Custom_int2_question,Custom_int2_answer,Custom_int3_state,Custom_int3_question,Custom_int3_answer,Custom_int4_state,Custom_int4_question,Custom_int4_answer")] Form form)
         {
+            var user = await _userManager.GetUserAsync(User);
+
+            if (user == null)
+            {
+                return Unauthorized(); 
+            }
+
             if (ModelState.IsValid)
             {
                 form.Id = Guid.NewGuid();
+                form.User_id = user.Id;
+                form.Topic_id = Guid.NewGuid();
                 _context.Add(form);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
