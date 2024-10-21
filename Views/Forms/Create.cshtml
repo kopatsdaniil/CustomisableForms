@@ -7,80 +7,98 @@
 <h1>Create</h1>
 
 <h4>Form</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Title" class="control-label"></label>
-                <input asp-for="Title" class="form-control" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <!--<div class="form-group">
-                <label asp-for="Image_url" class="control-label"></label>
-                <input asp-for="Image_url" class="form-control" />
-                <span asp-validation-for="Image_url" class="text-danger"></span>
-            </div>-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <style>
+        .form-group {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" action="@Url.Action("Create", "Forms")" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+
+        <div class="form-group">
+            <label asp-for="Title" class="control-label"></label>
+            <input asp-for="Title" class="form-control" />
+            <span asp-validation-for="Title" class="text-danger"></span>
+        </div>
+
+        <div class="form-group">
+            <label asp-for="Description" class="control-label"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Image_url" class="control-label">Upload Image</label>
+            <input type="file" name="ImageFile" class="form-control" />
+            <span asp-validation-for="Image_url" class="text-danger"></span>
+        </div>
+        <div id="questionsContainer">
             <div class="form-group">
                 <label asp-for="Custom_string1_question" class="control-label"></label>
                 <input asp-for="Custom_string1_question" class="form-control" />
                 <span asp-validation-for="Custom_string1_question" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Custom_string2_question" class="control-label"></label>
-                <input asp-for="Custom_string2_question" class="form-control" />
-                <span asp-validation-for="Custom_string2_question" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Custom_string3_question" class="control-label"></label>
-                <input asp-for="Custom_string3_question" class="form-control" />
-                <span asp-validation-for="Custom_string3_question" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Custom_string4_question" class="control-label"></label>
-                <input asp-for="Custom_string4_question" class="form-control" />
-                <span asp-validation-for="Custom_string4_question" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Custom_int1_question" class="control-label"></label>
-                <input asp-for="Custom_int1_question" class="form-control" />
-                <span asp-validation-for="Custom_int1_question" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Custom_int2_question" class="control-label"></label>
-                <input asp-for="Custom_int2_question" class="form-control" />
-                <span asp-validation-for="Custom_int2_question" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Custom_int3_question" class="control-label"></label>
-                <input asp-for="Custom_int3_question" class="form-control" />
-                <span asp-validation-for="Custom_int3_question" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Custom_int4_question" class="control-label"></label>
-                <input asp-for="Custom_int4_question" class="form-control" />
-                <span asp-validation-for="Custom_int4_question" class="text-danger"></span>
-            </div>
-            <div style="margin-top: 20px;">
-                <input asp-for="Image_url" type="file" name="Image" accept="image/*" />
-            </div>
-            <div style="margin-top: 20px" class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+        </div>
 
-<div style="margin-top: 3px">
-    <a asp-action="Index">Back to List</a>
-</div>
+        <div class="form-group">
+            <select id="questionTypeDropdown" class="form-control">
+                <option value="">Select a question type</option>
+                <option value="String">Question with a string answer</option>
+                <option value="Int">Question with a number answer</option>
+            </select>
+        </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+        <button type="button" id="addQuestionBtn">Add Question</button>
+        <br />
+        <input type="submit" value="Submit" />
+    </form>
+
+    <script>
+        $(document).ready(function () {
+            let stringQuestionCount = 1;
+            let intQuestionCount = 0;
+
+            $('#addQuestionBtn').click(function () {
+                const selectedType = $('#questionTypeDropdown').val();
+                let newQuestionHtml = '';
+
+                if (selectedType === "String" && stringQuestionCount < 4) {
+                    newQuestionHtml = `
+                                <div class="form-group">
+                                    <label for="Custom_string${stringQuestionCount + 1}_question" class="control-label">Question ${stringQuestionCount + 1}</label>
+                                    <input name="Custom_string${stringQuestionCount + 1}_question" class="form-control" />
+                                    <span class="text-danger"></span>
+                                </div>
+                            `;
+                    stringQuestionCount++;
+                } else if (selectedType === "Int" && intQuestionCount < 4) {
+                    newQuestionHtml = `
+                                <div class="form-group">
+                                    <label for="Custom_int${intQuestionCount + 1}_question" class="control-label">Question ${intQuestionCount + 1} with a number answer</label>
+                                    <input name="Custom_int${intQuestionCount + 1}_question" class="form-control" />
+                                    <span class="text-danger"></span>
+                                </div>
+                            `;
+                    intQuestionCount++;
+                } else if (selectedType === "") {
+                    alert("Please select a question type.");
+                    return;
+                } else {
+                    alert("You can only add up to 4 questions of each type.");
+                    return;
+                }
+
+                if (newQuestionHtml) {
+                    $('#questionsContainer').append(newQuestionHtml);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

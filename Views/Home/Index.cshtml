@@ -1,7 +1,12 @@
-﻿@{
+﻿@model IEnumerable<CustomisableForms.Models.Form>
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="jumbotron">
     <h1>Customisable Forms</h1>
 </div>
+
+<p>
+    <a asp-controller="Forms" asp-action="Create">Create New</a>
+</p>

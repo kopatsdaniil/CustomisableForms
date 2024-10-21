@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "rCMbBq1G5koBYxGQu89emeuZoZWcNF3Ehq7KSJ703Bc=",
+  "Hash": "rAuNV1KeVJ6R5kN3dIb6uRjIfVzgTPandZGXtL2gO8c=",
   "Source": "CustomisableForms",
   "BasePath": "_content/CustomisableForms",
   "Mode": "Default",
@@ -1231,6 +1231,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\kopot\\source\\repos\\CustomisableForms\\CustomisableForms\\wwwroot\\images\\default.png",
+      "SourceId": "CustomisableForms",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\kopot\\source\\repos\\CustomisableForms\\CustomisableForms\\wwwroot\\",
+      "BasePath": "_content/CustomisableForms",
+      "RelativePath": "images/default.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\default.png"
     },
     {
       "Identity": "C:\\Users\\kopot\\source\\repos\\CustomisableForms\\CustomisableForms\\wwwroot\\js\\site.js",

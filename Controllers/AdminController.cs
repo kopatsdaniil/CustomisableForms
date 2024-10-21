@@ -3,7 +3,6 @@ using CustomisableForms.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using CustomisableForms.Data;
 using Microsoft.AspNetCore.Authorization;
 
 namespace CustomisableForms.Controllers
@@ -25,12 +24,15 @@ namespace CustomisableForms.Controllers
 
             foreach (ApplicationUser user in users)
             {
-                var thisViewModel = new UserRolesViewModel();
-                thisViewModel.UserId = user.Id;
-                thisViewModel.UserName = user.UserName;
-                thisViewModel.Email = user.Email;
-                thisViewModel.Roles = await GetUserRoles(user);
-                thisViewModel.IsAdmin = await _userManager.IsInRoleAsync(user, "Admin");
+                var thisViewModel = new UserRolesViewModel
+                {
+                    UserId = user.Id,
+                    UserName = user.UserName ?? throw new NullReferenceException(),
+                    Email = user.Email ?? throw new NullReferenceException(),
+                    Roles = await GetUserRoles(user),
+                    IsAdmin = await _userManager.IsInRoleAsync(user, "Admin")
+                };
+
                 userRolesViewModel.Add(thisViewModel);
             }
             return View(userRolesViewModel);

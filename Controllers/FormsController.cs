@@ -59,26 +59,58 @@ namespace CustomisableForms.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description,Image_url,User_id,Topic_id,Custom_string1_state,Custom_string1_question,Custom_string1_answer,Custom_string2_state,Custom_string2_question,Custom_string2_answer,Custom_string3_state,Custom_string3_question,Custom_string3_answer,Custom_string4_state,Custom_string4_question,Custom_string4_answer,Custom_int1_state,Custom_int1_question,Custom_int1_answer,Custom_int2_state,Custom_int2_question,Custom_int2_answer,Custom_int3_state,Custom_int3_question,Custom_int3_answer,Custom_int4_state,Custom_int4_question,Custom_int4_answer")] Form form)
+        public async Task<IActionResult> Create([Bind("Id,Title,Description,Image_url," +
+    "User_id,Topic_id,Custom_string1_state,Custom_string1_question," +
+    "Custom_string1_answer,Custom_string2_state,Custom_string2_question," +
+    "Custom_string2_answer,Custom_string3_state,Custom_string3_question," +
+    "Custom_string3_answer,Custom_string4_state,Custom_string4_question," +
+    "Custom_string4_answer,Custom_int1_state,Custom_int1_question," +
+    "Custom_int1_answer,Custom_int2_state,Custom_int2_question,Custom_int2_answer," +
+    "Custom_int3_state,Custom_int3_question,Custom_int3_answer,Custom_int4_state," +
+    "Custom_int4_question,Custom_int4_answer")] Form form)
         {
             var user = await _userManager.GetUserAsync(User);
 
             if (user == null)
             {
-                return Unauthorized(); 
+                return Unauthorized();
             }
 
             if (ModelState.IsValid)
             {
                 form.Id = Guid.NewGuid();
-                form.User_id = user.Id;
+                form.User_id = Guid.Parse(user.Id);
                 form.Topic_id = Guid.NewGuid();
+
+                if (Request.Form.Files.Count > 0)
+                {
+                    IFormFile imageFile = Request.Form.Files.FirstOrDefault() ?? throw new FileNotFoundException("The uploaded file was not found.");
+                    var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/images");
+                    var fileName = Guid.NewGuid().ToString() + Path.GetExtension(imageFile.FileName);
+                    var filePath = Path.Combine(uploadsFolder, fileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await imageFile.CopyToAsync(stream);
+                    }
+
+                    form.Image_url = "/images/" + fileName;
+                }
+
+                else
+                {
+                    form.Image_url = "/images/default.png";
+                }
+
+                Form.SetStringState(form);
                 _context.Add(form);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Home");
             }
+
             return View(form);
         }
+
 
         // GET: Forms/Edit/5
         public async Task<IActionResult> Edit(Guid? id)

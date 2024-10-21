@@ -10,6 +10,7 @@ namespace CustomisableForms.Data
             : base(options)
         {
         }
-        public DbSet<CustomisableForms.Models.Form> Forms { get; set; } = default!;
+
+        public DbSet<Form> Forms { get; set; } = default!;
     }
 }
