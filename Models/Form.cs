@@ -25,56 +25,40 @@ namespace CustomisableForms.Models
         [Display(Name = "Question 1")]
         public string Custom_string1_question { get; set; } = string.Empty;
 
-        public string Custom_string1_answer { get; set; } = string.Empty;
-
         public bool Custom_string2_state { get; set; }
 
         [Display(Name = "Question 2")]
         public string Custom_string2_question { get; set; } = string.Empty;
-
-        public string Custom_string2_answer { get; set; } = string.Empty;
 
         public bool Custom_string3_state { get; set; }
 
         [Display(Name = "Question 3")]
         public string Custom_string3_question { get; set; } = string.Empty;
 
-        public string Custom_string3_answer { get; set; } = string.Empty;
-
         public bool Custom_string4_state { get; set; }
 
         [Display(Name = "Question 4")]
         public string Custom_string4_question { get; set; } = string.Empty;
-
-        public string Custom_string4_answer { get; set; } = string.Empty;
 
         public bool Custom_int1_state { get; set; }
 
         [Display(Name = "Question 1 with a number answer")]
         public string Custom_int1_question { get; set; } = string.Empty;
 
-        public int Custom_int1_answer { get; set; }
-
         public bool Custom_int2_state { get; set; }
 
         [Display(Name = "Question 2 with a number answer")]
         public string Custom_int2_question { get; set; } = string.Empty;
-
-        public int Custom_int2_answer { get; set; }
 
         public bool Custom_int3_state { get; set; }
 
         [Display(Name = "Question 3 with a number answer")]
         public string Custom_int3_question { get; set; } = string.Empty;
 
-        public int Custom_int3_answer { get; set; }
-
         public bool Custom_int4_state { get; set; }
 
         [Display(Name = "Question 4 with a number answer")]
         public string Custom_int4_question { get; set; } = string.Empty;
-
-        public int Custom_int4_answer { get; set; }
 
         public static void SetStringState(Form form)
         {

@@ -24,9 +24,9 @@ namespace CustomisableForms.Controllers
         }
 
         // GET: Forms
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Forms.ToListAsync());
+            return RedirectToAction("Index", "Home");
         }
 
         // GET: Forms/Details/5
@@ -142,24 +142,13 @@ namespace CustomisableForms.Controllers
 
             if (ModelState.IsValid)
             {
-                try
-                {
-                    _context.Update(form);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!FormExists(form.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
+                // If the form is valid, update it in the database
+                _context.Update(form);
+                await _context.SaveChangesAsync();
+
+                return RedirectToAction("Index", "Home");
             }
+
             return View(form);
         }
 
