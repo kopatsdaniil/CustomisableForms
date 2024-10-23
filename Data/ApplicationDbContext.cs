@@ -1,7 +1,6 @@
-﻿using CustomisableForms.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using CustomisableForms.Models;
 
 namespace CustomisableForms.Data
 {
@@ -11,6 +10,8 @@ namespace CustomisableForms.Data
             : base(options)
         {
         }
-        public DbSet<CustomisableForms.Models.Form> Form { get; set; } = default!;
+
+        public DbSet<Form> Forms { get; set; } = default!;
+        public DbSet<Answer> Answers { get; set; } = default!;
     }
 }

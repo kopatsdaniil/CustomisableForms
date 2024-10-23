@@ -1,4 +1,4 @@
-namespace CustomisableForms.Models
+namespace CustomisableForms.Models.ViewModels
 {
     public class ErrorViewModel
     {

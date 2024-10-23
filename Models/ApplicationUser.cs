@@ -4,6 +4,6 @@ namespace CustomisableForms.Models
 {
     public class ApplicationUser : IdentityUser
     {
-        public IList<Form> Forms { get; set; }
+        public required IList<Form> Forms { get; set; }
     }
 }

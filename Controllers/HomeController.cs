@@ -1,22 +1,23 @@
-using CustomisableForms.Models;
-using Microsoft.AspNetCore.Authorization;
+using CustomisableForms.Data;
+using CustomisableForms.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace CustomisableForms.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly ApplicationDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
-        {   
-            _logger = logger;
+        public HomeController(ApplicationDbContext context)
+        {
+            _context = context;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            return View(await _context.Forms.ToListAsync());
         }
 
         public IActionResult Privacy()

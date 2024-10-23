@@ -60,14 +60,16 @@ app.MapRazorPages();
 
 using(var scope = app.Services.CreateScope())
 {
-    var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
-
-    var roles = new[] { "Admin", "User" };
-
-    foreach (var role in roles)
+    var loggerFactory = scope.ServiceProvider.GetRequiredService<ILoggerFactory>();
+    try
     {
-        if (!await roleManager.RoleExistsAsync(role))
-            await roleManager.CreateAsync(new IdentityRole(role));
+        var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+        await ContextSeed.SeedRolesAsync(roleManager);
+    }
+    catch (Exception ex)
+    {
+        var logger = loggerFactory.CreateLogger<Program>();
+        logger.LogError(ex, "An error occurred seeding the DB.");
     }
 }
 

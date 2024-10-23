@@ -1,7 +1,132 @@
-﻿@{
+﻿@model IEnumerable<CustomisableForms.Models.Form>
+@{
     ViewData["Title"] = "Home Page";
 }
 
 <div class="jumbotron">
     <h1>Customisable Forms</h1>
 </div>
+
+<p>
+    <a asp-controller="Forms" asp-action="Create">Create New</a>
+</p>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Forms</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .form-card {
+            display: flex;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+            .form-card:hover {
+                box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            }
+
+        .form-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('YOUR_IMAGE_URL');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3;
+            z-index: 0;
+        }
+
+        .form-content {
+            flex: 1;
+            padding-right: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .form-description {
+            color: #666;
+            margin-bottom: 10px;
+        }
+
+        .form-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 5px;
+            object-fit: cover;
+            margin-left: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            color: white;
+            background-color: #007bff;
+            text-decoration: none;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+            .btn:hover {
+                background-color: #0056b3;
+            }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="text-center mb-4">Available Forms</h1>
+
+        <div class="form-list">
+            @foreach (var form in Model)
+            {
+                <div class="form-card">
+                    <div class="form-background"></div>
+                    <div class="form-content">
+                        <div class="form-title">@form.Title</div>
+                        <div class="form-description">@form.Description</div>
+                        <a href="@Url.Action("Details", "Forms", new { id = form.Id })" class="btn">Fill out Form</a>
+                    </div>
+                    @if (!string.IsNullOrEmpty(form.Image_url))
+                    {
+                        <img src="@form.Image_url" alt="@form.Title" class="form-image" />
+                    }
+                </div>
+            }
+        </div>
+        <br />
+        <br />
+    </div>
+
+</body>
+</html>
