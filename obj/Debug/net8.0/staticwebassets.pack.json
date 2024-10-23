@@ -17,18 +17,6 @@
       "PackagePath": "staticwebassets\\images\\default.png"
     },
     {
-      "Id": "C:\\Users\\kopot\\source\\repos\\CustomisableForms\\CustomisableForms\\wwwroot\\images\\e7d45020-425e-429f-8e14-3718b0601420.pdf",
-      "PackagePath": "staticwebassets\\images\\e7d45020-425e-429f-8e14-3718b0601420.pdf"
-    },
-    {
-      "Id": "C:\\Users\\kopot\\source\\repos\\CustomisableForms\\CustomisableForms\\wwwroot\\images\\eefb0387-e1d3-4506-8aee-62a7131c5cf6.png",
-      "PackagePath": "staticwebassets\\images\\eefb0387-e1d3-4506-8aee-62a7131c5cf6.png"
-    },
-    {
-      "Id": "C:\\Users\\kopot\\source\\repos\\CustomisableForms\\CustomisableForms\\wwwroot\\images\\fb5be61c-c93d-45d5-a3cd-3ceefd5fbe1a.jpg",
-      "PackagePath": "staticwebassets\\images\\fb5be61c-c93d-45d5-a3cd-3ceefd5fbe1a.jpg"
-    },
-    {
       "Id": "C:\\Users\\kopot\\source\\repos\\CustomisableForms\\CustomisableForms\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
