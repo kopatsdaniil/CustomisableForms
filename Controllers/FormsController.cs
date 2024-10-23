@@ -9,6 +9,7 @@ using CustomisableForms.Data;
 using CustomisableForms.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace CustomisableForms.Controllers
 {
@@ -59,15 +60,12 @@ namespace CustomisableForms.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description,Image_url," +
-    "User_id,Topic_id,Custom_string1_state,Custom_string1_question," +
-    "Custom_string1_answer,Custom_string2_state,Custom_string2_question," +
-    "Custom_string2_answer,Custom_string3_state,Custom_string3_question," +
-    "Custom_string3_answer,Custom_string4_state,Custom_string4_question," +
-    "Custom_string4_answer,Custom_int1_state,Custom_int1_question," +
-    "Custom_int1_answer,Custom_int2_state,Custom_int2_question,Custom_int2_answer," +
-    "Custom_int3_state,Custom_int3_question,Custom_int3_answer,Custom_int4_state," +
-    "Custom_int4_question,Custom_int4_answer")] Form form)
+        public async Task<IActionResult> Create([Bind("Id,Title,Description,Image_url,User_id," +
+            "Topic_id,Custom_string1_state,Custom_string1_question,Custom_string2_state," +
+            "Custom_string2_question,Custom_string3_state,Custom_string3_question,Custom_string4_state," +
+            "Custom_string4_question,Custom_int1_state,Custom_int1_question,Custom_int2_state," +
+            "Custom_int2_question,Custom_int3_state,Custom_int3_question,Custom_int4_state," +
+            "Custom_int4_question")] Form form)
         {
             var user = await _userManager.GetUserAsync(User);
 
@@ -133,7 +131,12 @@ namespace CustomisableForms.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Title,Description,Image_url,User_id,Topic_id,Custom_string1_state,Custom_string1_question,Custom_string1_answer,Custom_string2_state,Custom_string2_question,Custom_string2_answer,Custom_string3_state,Custom_string3_question,Custom_string3_answer,Custom_string4_state,Custom_string4_question,Custom_string4_answer,Custom_int1_state,Custom_int1_question,Custom_int1_answer,Custom_int2_state,Custom_int2_question,Custom_int2_answer,Custom_int3_state,Custom_int3_question,Custom_int3_answer,Custom_int4_state,Custom_int4_question,Custom_int4_answer")] Form form)
+        public async Task<IActionResult> Edit(Guid id, [Bind("Id,Title,Description,Image_url,User_id," +
+            "Topic_id,Custom_string1_state,Custom_string1_question,Custom_string2_state," +
+            "Custom_string2_question,Custom_string3_state,Custom_string3_question,Custom_string4_state," +
+            "Custom_string4_question,Custom_int1_state,Custom_int1_question,Custom_int2_state," +
+            "Custom_int2_question,Custom_int3_state,Custom_int3_question,Custom_int4_state," +
+            "Custom_int4_question")] Form form)
         {
             if (id != form.Id)
             {
@@ -142,7 +145,6 @@ namespace CustomisableForms.Controllers
 
             if (ModelState.IsValid)
             {
-                // If the form is valid, update it in the database
                 _context.Update(form);
                 await _context.SaveChangesAsync();
 

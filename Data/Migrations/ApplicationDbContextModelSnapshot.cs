@@ -22,6 +22,51 @@ namespace CustomisableForms.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("CustomisableForms.Models.Answer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Custom_int1_answer")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Custom_int2_answer")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Custom_int3_answer")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Custom_int4_answer")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Custom_string1_answer")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Custom_string2_answer")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Custom_string3_answer")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Custom_string4_answer")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("Form_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("User_Id")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Answers");
+                });
+
             modelBuilder.Entity("CustomisableForms.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -96,18 +141,12 @@ namespace CustomisableForms.Data.Migrations
                     b.Property<string>("ApplicationUserId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<int>("Custom_int1_answer")
-                        .HasColumnType("int");
-
                     b.Property<string>("Custom_int1_question")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Custom_int1_state")
                         .HasColumnType("bit");
-
-                    b.Property<int>("Custom_int2_answer")
-                        .HasColumnType("int");
 
                     b.Property<string>("Custom_int2_question")
                         .IsRequired()
@@ -116,18 +155,12 @@ namespace CustomisableForms.Data.Migrations
                     b.Property<bool>("Custom_int2_state")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Custom_int3_answer")
-                        .HasColumnType("int");
-
                     b.Property<string>("Custom_int3_question")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Custom_int3_state")
                         .HasColumnType("bit");
-
-                    b.Property<int>("Custom_int4_answer")
-                        .HasColumnType("int");
 
                     b.Property<string>("Custom_int4_question")
                         .IsRequired()
@@ -136,20 +169,12 @@ namespace CustomisableForms.Data.Migrations
                     b.Property<bool>("Custom_int4_state")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Custom_string1_answer")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Custom_string1_question")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Custom_string1_state")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Custom_string2_answer")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Custom_string2_question")
                         .IsRequired()
@@ -158,20 +183,12 @@ namespace CustomisableForms.Data.Migrations
                     b.Property<bool>("Custom_string2_state")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Custom_string3_answer")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Custom_string3_question")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("Custom_string3_state")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Custom_string4_answer")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Custom_string4_question")
                         .IsRequired()

@@ -12,5 +12,6 @@ namespace CustomisableForms.Data
         }
 
         public DbSet<Form> Forms { get; set; } = default!;
+        public DbSet<Answer> Answers { get; set; } = default!;
     }
 }

@@ -1,6 +1,13 @@
 ﻿@model CustomisableForms.Models.Form
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+
 @{
-    ViewData["Title"] = "Answer Form";
+    ViewData["Title"] = "Form Details";
+
+    var author = UserManager.FindByIdAsync(Model.User_id.ToString()).Result;
+    var authorName = author?.UserName ?? "Unknown Author";
+    var canEditAuthor = User.Identity?.Name == authorName || User.IsInRole("Admin");
 }
 
 <div class="container mt-5">
@@ -10,6 +17,11 @@
 
     <form asp-action="SubmitAnswers" method="post">
         <input type="hidden" asp-for="Id" />
+
+        <div class="form-group">
+            <label for="authorName" class="font-weight-bold">Author</label>
+            <input type="text" id="authorName" class="form-control form-control-lg" value="@authorName" disabled />
+        </div>
 
         <div class="form-row">
             @if (Model.Custom_string1_state)
@@ -25,24 +37,6 @@
                 <div class="form-group col-md-6">
                     <label>@Model.Custom_string2_question</label>
                     <input type="text" name="Custom_string2_answer" class="form-control" placeholder="Enter your answer" />
-                </div>
-            }
-        </div>
-
-        <div class="form-row">
-            @if (Model.Custom_string3_state)
-            {
-                <div class="form-group col-md-6">
-                    <label>@Model.Custom_string3_question</label>
-                    <input type="text" name="Custom_string3_answer" class="form-control" placeholder="Enter your answer" />
-                </div>
-            }
-
-            @if (Model.Custom_string4_state)
-            {
-                <div class="form-group col-md-6">
-                    <label>@Model.Custom_string4_question</label>
-                    <input type="text" name="Custom_string4_answer" class="form-control" placeholder="Enter your answer" />
                 </div>
             }
         </div>
@@ -65,31 +59,23 @@
             }
         </div>
 
-        <div class="form-row">
-            @if (Model.Custom_int3_state)
-            {
-                <div class="form-group col-md-6">
-                    <label>@Model.Custom_int3_question</label>
-                    <input type="number" name="Custom_int3_answer" class="form-control" placeholder="Enter your answer" />
-                </div>
-            }
-
-            @if (Model.Custom_int4_state)
-            {
-                <div class="form-group col-md-6">
-                    <label>@Model.Custom_int4_question</label>
-                    <input type="number" name="Custom_int4_answer" class="form-control" placeholder="Enter your answer" />
-                </div>
-            }
-        </div>
-
-        <div class="text-center">
+        <div style="margin-right: 10px" class="text-center">
             <input type="submit" value="Submit Answers" class="btn btn-primary btn-lg mt-4" />
         </div>
     </form>
 
     <div class="text-center mt-3">
+        @if (canEditAuthor)
+        {
+            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning me-2">Edit</a>
+        }
         <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        @if (canEditAuthor)
+        {
+            <form style="margin-left: 7px" asp-action="Delete" asp-route-id="@Model.Id" method="post" class="d-inline">
+                <button type="submit" class="btn btn-danger me-2" onclick="return confirm('Are you sure you want to delete this form?');">Delete</button>
+            </form>
+        }
     </div>
 </div>
 
@@ -106,13 +92,18 @@
         margin-bottom: 20px;
     }
 
-    .form-control {
-        border-radius: 5px;
+    .form-group input.form-control {
+        border-radius: 0.5rem;
         border: 1px solid #ced4da;
+        transition: border-color 0.3s, box-shadow 0.3s;
     }
 
-        .form-control:focus {
+        .form-group input.form-control:focus {
             border-color: #007bff;
             box-shadow: 0 0 5px rgba(0, 123, 255, 0.25);
         }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
 </style>

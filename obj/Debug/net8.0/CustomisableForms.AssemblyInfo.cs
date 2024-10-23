@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CustomisableForms")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9dfa5ecdd8a7412fd2af26c43677193f9bbe68b8")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+816d68c843b94083026fb41f3dee797427301ae4")]
 [assembly: System.Reflection.AssemblyProductAttribute("CustomisableForms")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CustomisableForms")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
