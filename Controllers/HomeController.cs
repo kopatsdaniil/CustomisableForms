@@ -15,9 +15,20 @@ namespace CustomisableForms.Controllers
             _context = context;
         }
 
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public IActionResult Index(string searchTerm)
         {
-            return View(await _context.Forms.ToListAsync());
+            ViewData["CurrentFilter"] = searchTerm;
+
+            var forms = from f in _context.Forms
+                        select f;
+
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                forms = forms.Where(f => f.Title.Contains(searchTerm) || f.Description.Contains(searchTerm));
+            }
+
+            return View(forms.ToList());
         }
 
         public IActionResult Privacy()

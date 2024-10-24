@@ -11,5 +11,7 @@
         public IEnumerable<string> Roles { get; set; }
 
         public bool IsAdmin { get; set; }
+
+        public bool Delete { get; set; }
     }
 }

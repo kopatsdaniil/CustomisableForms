@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using CustomisableForms.Data;
 
 namespace CustomisableForms.Controllers
 {
@@ -11,9 +12,11 @@ namespace CustomisableForms.Controllers
     public class AdminController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ApplicationDbContext _context;
 
-        public AdminController(UserManager<ApplicationUser> userManager)
+        public AdminController(UserManager<ApplicationUser> userManager, ApplicationDbContext context)
         {
+            _context = context;
             _userManager = userManager;
         }
 
@@ -22,7 +25,7 @@ namespace CustomisableForms.Controllers
             var users = await _userManager.Users.ToListAsync();
             var userRolesViewModel = new List<UserRolesViewModel>();
 
-            foreach (ApplicationUser user in users)
+            foreach (var user in users)
             {
                 var thisViewModel = new UserRolesViewModel
                 {
@@ -52,18 +55,49 @@ namespace CustomisableForms.Controllers
 
                 if (identityUser != null)
                 {
-                    if (user.IsAdmin)
+                    // Проверка на удаление пользователя
+                    if (user.Delete)
                     {
-                        if (!await _userManager.IsInRoleAsync(identityUser, "Admin"))
+                        // Получаем все роли пользователя
+                        var roles = await _userManager.GetRolesAsync(identityUser);
+
+                        // Удаляем пользователя из всех ролей
+                        foreach (var role in roles)
                         {
-                            await _userManager.AddToRoleAsync(identityUser, "Admin");
+                            var roleRemovalResult = await _userManager.RemoveFromRoleAsync(identityUser, role);
+                            if (!roleRemovalResult.Succeeded)
+                            {
+                                // Обработка ошибок при удалении ролей
+                                ModelState.AddModelError("", $"Error removing role {role} from user {identityUser.UserName}");
+                                continue;
+                            }
+                        }
+
+                        // Удаляем пользователя
+                        var userRemovalResult = await _userManager.DeleteAsync(identityUser);
+                        if (!userRemovalResult.Succeeded)
+                        {
+                            // Обработка ошибок при удалении пользователя
+                            ModelState.AddModelError("", $"Error deleting user {identityUser.UserName}");
+                            continue;
                         }
                     }
                     else
                     {
-                        if (await _userManager.IsInRoleAsync(identityUser, "Admin"))
+                        // Управление ролями (добавление/удаление роли Admin)
+                        if (user.IsAdmin)
                         {
-                            await _userManager.RemoveFromRoleAsync(identityUser, "Admin");
+                            if (!await _userManager.IsInRoleAsync(identityUser, "Admin"))
+                            {
+                                await _userManager.AddToRoleAsync(identityUser, "Admin");
+                            }
+                        }
+                        else
+                        {
+                            if (await _userManager.IsInRoleAsync(identityUser, "Admin"))
+                            {
+                                await _userManager.RemoveFromRoleAsync(identityUser, "Admin");
+                            }
                         }
                     }
                 }

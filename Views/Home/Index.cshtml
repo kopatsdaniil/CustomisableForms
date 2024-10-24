@@ -11,6 +11,11 @@
     <a asp-controller="Forms" asp-action="Create">Create New</a>
 </p>
 
+<form method="get" asp-controller="Home" asp-action="Index">
+    <input type="text" name="searchTerm" value="@ViewData["CurrentFilter"]" placeholder="Search forms..." class="form-control" style="width: 300px; display: inline-block; margin-bottom: 20px;" />
+    <input style="margin-bottom: 3px" type="submit" value="Search" class="btn btn-primary" />
+</form>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

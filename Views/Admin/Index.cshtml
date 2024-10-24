@@ -13,6 +13,7 @@
                 <th>Email</th>
                 <th>Roles</th>
                 <th style="text-align: right;">Is Admin</th>
+                <th style="text-align: right;">Delete</th> <!-- Новый столбец для удаления -->
             </tr>
         </thead>
         <tbody>
@@ -30,6 +31,12 @@
                                id="role_@user.UserId"
                         @(user.Roles.Contains("Admin") ? "checked" : "") />
                         <input type="hidden" name="users[@i].UserId" value="@user.UserId" />
+                    </td>
+                    <td style="text-align: right;">
+                        <input type="checkbox"
+                               name="users[@i].Delete"
+                               value="true"
+                               id="delete_@user.UserId" />
                     </td>
                 </tr>
             }
