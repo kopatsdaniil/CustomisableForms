@@ -94,7 +94,7 @@ namespace CustomisableForms.Data.Migrations
                     Custom_int3_question = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Custom_int4_state = table.Column<bool>(type: "bit", nullable: false),
                     Custom_int4_question = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ApplicationUserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ApplicationUserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                 },
                 constraints: table =>
                 {
