@@ -17,21 +17,6 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.S
     .AddDefaultTokenProviders();
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddAuthentication()
-   .AddGoogle(options =>
-   {
-       IConfigurationSection googleAuthNSection =
-       builder.Configuration.GetSection("Authentication:Google");
-       options.ClientId = googleAuthNSection["ClientId"];
-       options.ClientSecret = googleAuthNSection["ClientSecret"];
-   })
-   .AddMicrosoftAccount(microsoftOptions =>
-   {
-       microsoftOptions.ClientId = builder.Configuration["Authentication:Microsoft:ClientId"];
-       microsoftOptions.ClientSecret = builder.Configuration["Authentication:Microsoft:ClientSecret"];
-   });
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
